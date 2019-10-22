@@ -34,7 +34,7 @@ setup(
     long_description=readme,
     packages=find_packages(),
     install_requires=[
-        "sys >= 3.7.3",
+#         "sys >= 3.7.3",
         "PyQt5 >= 5.13.5",
         "numpy >= 1.16.3",
         "pandas >= 0.24.2",
