@@ -2,6 +2,7 @@
 Handy PyQt-based GUI for data visualisation based on a csv file or pandas' DataFrame.
 This GUI basically based on the matplotlib and you can visualize your csv file in various ways.
 Here are the main features;
+
 • Scatter, line, density, histgram, and box plot for visualisation your csv.
 
 • Detail setting for the marker size, line width, number of bins of histgram, color map (from cmocean).
