@@ -20,7 +20,7 @@ version = next((line.split('=')[1].strip().replace("'", '')
                                               'sviewgui',
                                               '__init__.py'))
                 if line.startswith('__version__ = ')),
-               '0.0.dev0')
+               '0.1.0')
 
 setup(
     name="sviewgui",
@@ -34,16 +34,16 @@ setup(
     long_description=readme,
     packages=find_packages(),
     install_requires=[
-        "sys",
-        "PyQt5",
-        "numpy",
-        "pandas",
-        "matplotlib",
-        "Pathlib",
-        "scipy",
-        "cmocean",
-        "seaborn",
-        "pygments"
+        "sys >= 3.7.3",
+        "PyQt5 >= 5.13.5",
+        "numpy >= 1.16.3",
+        "pandas >= 0.24.2",
+        "matplotlib >= 3.0.3",
+        "Pathlib2 >= 2.3.3",
+        "scipy >= 1.2.1",
+        "cmocean >= 2.0",
+        "seaborn >= 0.9.0",
+        "pygments >= 2.4.0"
     ],
     license="SojiroFukuda",
     classifiers=[
