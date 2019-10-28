@@ -18,7 +18,9 @@ here = os.path.dirname(os.path.abspath(__file__))
 version = next((line.split('=')[1].strip().replace("'", '')
                 for line in open(os.path.join(here,
                                               'sviewgui',
-                                              '__init__.py'))
+                                              '__init__.py',
+                                              'sview.py',
+                                              'sgui.py'))
                 if line.startswith('__version__ = ')),
                '0.1.5')
 
