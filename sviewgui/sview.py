@@ -9,7 +9,7 @@ import glob
 import numpy as np
 import pandas as pd
 import random
-import sgui as gui
+from . import sgui as gui
 
 import matplotlib.cm
 import matplotlib.pyplot as plt
