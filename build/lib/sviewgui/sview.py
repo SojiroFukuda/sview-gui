@@ -151,7 +151,7 @@ class Csviwer(Qw.QMainWindow):
     def loadData(self,data): #import csv file path
         # import CSV
         strflag = 0
-        
+
         if type(data) == None:
             return
         if isinstance(data,str) and data != 'None':
@@ -169,7 +169,7 @@ class Csviwer(Qw.QMainWindow):
 
         if strflag == 0:
             self.ui.textbox_csvPath.setText("")
-        
+        self.csv = data
         self.csv["Row_INDEX_"] = np.linspace(1,len(self.csv),len(self.csv))
         self.data = data
         self.data["Row_INDEX_"] = np.linspace(1,len(self.data),len(self.data))
@@ -1555,4 +1555,3 @@ def buildGUI(data = 'None'):
     elif isinstance(data,str) and data != 'None':
         wmain.loadData(data)
     sys.exit(app.exec_())
-
