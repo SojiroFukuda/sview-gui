@@ -153,6 +153,7 @@ class Csviwer(Qw.QMainWindow):
         if type(data) == None:
             return
         if isinstance(data,str) and data != 'None':
+            self.CSV_PATH = data
             try:
                 data = pd.read_csv(data)
             except FileNotFoundError as e:
@@ -161,7 +162,6 @@ class Csviwer(Qw.QMainWindow):
                 print("Unexpected error:",sys.exc_info()[0])
                 raise
             finally:
-                self.CSV_PATH = data
         self.ui.textbox_csvPath.setText("")
         # self.CSV_PATH = path
         self.csv = data
