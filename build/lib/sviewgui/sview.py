@@ -163,8 +163,6 @@ class Csviwer(Qw.QMainWindow):
                 raise
             finally:
         self.ui.textbox_csvPath.setText("")
-        # self.CSV_PATH = path
-        self.csv = data
         self.csv["Row_INDEX_"] = np.linspace(1,len(self.csv),len(self.csv))
         self.data = data
         self.data["Row_INDEX_"] = np.linspace(1,len(self.data),len(self.data))
