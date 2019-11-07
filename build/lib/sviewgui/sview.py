@@ -161,7 +161,7 @@ class Csviwer(Qw.QMainWindow):
                 print("Unexpected error:",sys.exc_info()[0])
                 raise
             finally:
-                pass
+                self.CSV_PATH = data
         self.ui.textbox_csvPath.setText("")
         # self.CSV_PATH = path
         self.csv = data
