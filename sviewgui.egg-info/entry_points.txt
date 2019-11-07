@@ -1,0 +1,5 @@
+
+      # -*- Entry points: -*-
+      [console_scripts]
+      sviewstart = sviewgui.sview:buildGUI
+    
