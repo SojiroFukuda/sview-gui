@@ -1,4 +1,5 @@
 # sview-gui
+
 Handy PyQt-based GUI for data visualisation based on a csv file or pandas' DataFrame.
 This GUI is based on the matplotlib and you can visualize your csv file in various ways.
 Here are the main features;
@@ -16,13 +17,12 @@ It is very simple! Just import the library and call the method 'buildGUI()' like
 
 ####################################
 
-# Sample Code 1
+## Sample Code 1
 
 import sviewgui.sview as sv
 
 sv.buildGUI()
 
-zsh:1: command not found: ZZ
 Then GUI will open and you can import csv file from the GUI.
 
 The method 'buildGUI' can also take one argument of String or pandas' dataframe object.
@@ -30,7 +30,7 @@ You can specify the file path of your csv file as String object or create a data
 
 #####################################
 
-# Sample Code 2
+## Sample Code 2
 
 import sviewgui.sview as sv
 
@@ -41,7 +41,8 @@ df = pd.DataFrame(data)
 sv.buildGUI(df)
 
 #####################################
-# Sample Code 3
+
+## Sample Code 3
 
 import sviewgui.sview as sv
 
