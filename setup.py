@@ -20,7 +20,8 @@ version = next((line.split('=')[1].strip().replace("'", '')
                                               'sviewgui',
                                               '__init__.py'))
                 if line.startswith('__version__ = ')),
-               '0.1.19')
+                '0.1.20')
+
 
 setup(
     name="sviewgui",
