@@ -110,6 +110,7 @@ class Csviwer(Qw.QMainWindow):
         html = pygments.highlight(initial_str,lexer,formatter)
         self.ui.logbox.append(html)
         self.ui.logbox.moveCursor(Qg.QTextCursor.End)
+        self.isPandas = False
         self.CSV_PATH = "" # Path of csv
         self.HEADER_LIST = [] # List of header name of CSV file
         self.NUMERIC_HEADER_LIST = [] # List of header name of CSV file (only numeric data)
@@ -151,7 +152,6 @@ class Csviwer(Qw.QMainWindow):
     def loadData(self,data): #import csv file path
         # import CSV
         strflag = 0
-
         if type(data) == None:
             return
         if isinstance(data,str) and data != 'None':
@@ -169,6 +169,8 @@ class Csviwer(Qw.QMainWindow):
 
         if strflag == 0:
             self.ui.textbox_csvPath.setText("")
+
+            self.isPandas = True
         self.csv = data
         self.csv["Row_INDEX_"] = np.linspace(1,len(self.csv),len(self.csv))
         self.data = data
@@ -529,9 +531,13 @@ class Csviwer(Qw.QMainWindow):
         # Syntax Coloring Setting #--------------------------
         
         # Log #-----------------------
-        File_log_str = '#- Import CSV as DataFrame ---------- ' + '\n'
-        File_log_str += 'FILE_PATH = \'' + str(self.CSV_PATH) + '\'' + '\n'
-        File_log_str += 'DATA = pd.read_csv(FILE_PATH)' + '\n'
+        if self.isPandas == False:
+            File_log_str = '#- Import CSV as DataFrame ---------- ' + '\n'
+            File_log_str += 'FILE_PATH = \'' + str(self.CSV_PATH) + '\'' + '\n'
+            File_log_str += 'DATA = pd.read_csv(FILE_PATH)' + '\n'
+        elif self.isPandas == True:
+            File_log_str = '#- DataFrame ---------- ' + '\n'
+            File_log_str += 'DATA = ## Put Your DataFrame Object name here ##  ' + '\n' + '\n'
         File_log_str += '#- Axes Setting ---------- ' + '\n'
         File_log_str += 'fig, ax = plt.subplots()' + '\n'
         # ----------------------------
