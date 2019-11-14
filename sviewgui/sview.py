@@ -740,7 +740,7 @@ class Csviwer(Qw.QMainWindow):
                         # ----------------------------
                     elif self.PLOT_TYPE == DENSITY: # Density plot (when x and y are the same, it stacks)
                         if len(self.data) != 2:
-                            sns.kdeplot(self.ax1,self.data[self.x_var].replace([np.inf, -np.inf], np.nan),self.data[self.y_var].replace([np.inf, -np.inf], np.nan), shade=True, cbar = True, cmap = "cmo."+cmap )
+                            sns.kdeplot(self.data[self.x_var].replace([np.inf, -np.inf], np.nan),self.data[self.y_var].replace([np.inf, -np.inf], np.nan), ax = self.ax1, shade=True, cbar = True, cmap = "cmo."+cmap )
                             # Log #-----------------------
                             File_log_str +=  'sns.kdeplot(sub_data["' + str(self.x_var) + '"], sub_data["' + str(self.y_var) + '"], ax = ax, shade = True, cbar = True, cmap = "cmo." + "'+str(cmap)+'" ) ' + '\n'
                             # ----------------------------
@@ -834,7 +834,7 @@ class Csviwer(Qw.QMainWindow):
                                 # ----------------------------
                             elif self.PLOT_TYPE == DENSITY: # Density plot (when x and y are the same, it stacks)
                                 if len(self.data) != 0:
-                                    sns.kdeplot(self.ax1,self.data[self.x_var].replace([np.inf, -np.inf], np.nan),self.data[self.y_var].replace([np.inf, -np.inf], np.nan), shade=True, cbar = True, cmap = "cmo."+cmap )
+                                    sns.kdeplot(self.data[self.x_var].replace([np.inf, -np.inf], np.nan),self.data[self.y_var].replace([np.inf, -np.inf], np.nan),ax=self.ax1, shade=True, cbar = True, cmap = "cmo."+cmap )
                                     # Log #-----------------------
                                     File_log_str +=  'sns.kdeplot(subsub_data["' + str(self.x_var) + '"], subsub_data["' + str(self.y_var) + '"], ax = ax, shade = True, cbar = True, cmap = "cmo." + "'+str(cmap)+'" ) ' + '\n'
                                     # ----------------------------
@@ -933,7 +933,7 @@ class Csviwer(Qw.QMainWindow):
                                     # ----------------------------
                                 elif self.PLOT_TYPE == DENSITY: # Density plot (when x and y are the same, it stacks)
                                     if len(self.data) != 0:
-                                        sns.kdeplot(self.ax1,self.data[self.x_var].replace([np.inf, -np.inf], np.nan),self.data[self.y_var].replace([np.inf, -np.inf], np.nan), shade=True, cbar = True, cmap = "cmo."+cmap )
+                                        sns.kdeplot(self.data[self.x_var].replace([np.inf, -np.inf], np.nan),self.data[self.y_var].replace([np.inf, -np.inf], np.nan),ax=self.ax1, shade=True, cbar = True, cmap = "cmo."+cmap )
                                         # Log #-----------------------
                                         File_log_str +=  'sns.kdeplot(subssubub_data["' + str(self.x_var) + '"], subsubsub_data["' + str(self.y_var) + '"], ax = ax, shade = True, cbar = True, cmap = "cmo." + "'+str(cmap)+'" ) ' + '\n'
                                         # ----------------------------
@@ -1225,7 +1225,7 @@ class Csviwer(Qw.QMainWindow):
                         # ----------------------------
                     elif self.PLOT_TYPE == DENSITY: # Density plot (when x and y are the same, it stacks)
                         if len(data) != 2:
-                            sns.kdeplot(self.ax1,self.data[self.x_var].replace([np.inf, -np.inf], np.nan),self.data[self.y_var].replace([np.inf, -np.inf], np.nan), shade=True, cbar = True, cmap = "cmo."+cmap )
+                            sns.kdeplot(self.data[self.x_var].replace([np.inf, -np.inf], np.nan),self.data[self.y_var].replace([np.inf, -np.inf], np.nan), ax=self.ax1, shade=True, cbar = True, cmap = "cmo."+cmap )
                             # Log #-----------------------
                             File_log_str +=  'sns.kdeplot(sub_data["' + str(self.x_var) + '"], sub_data["' + str(self.y_var) + '"], ax = ax, shade = True, cbar = True, cmap = "cmo." + "'+str(cmap)+'" ) ' + '\n'
                             # ----------------------------
@@ -1319,7 +1319,7 @@ class Csviwer(Qw.QMainWindow):
                                 # ----------------------------
                             elif self.PLOT_TYPE == DENSITY: # Density plot (when x and y are the same, it stacks)
                                 if len(data2) != 0:
-                                    sns.kdeplot(self.ax1,self.data[self.x_var].replace([np.inf, -np.inf], np.nan),self.data[self.y_var].replace([np.inf, -np.inf], np.nan), shade=True, cbar = True, cmap = "cmo."+cmap )
+                                    sns.kdeplot(self.data[self.x_var].replace([np.inf, -np.inf], np.nan),self.data[self.y_var].replace([np.inf, -np.inf], np.nan), ax=self.ax1, shade=True, cbar = True, cmap = "cmo."+cmap )
                                     # Log #-----------------------
                                     File_log_str +=  'sns.kdeplot(subsub_data["' + str(self.x_var) + '"], subsub_data["' + str(self.y_var) + '"], ax = ax, shade = True, cbar = True, cmap = "cmo." + "'+str(cmap)+'" ) ' + '\n'
                                     # ----------------------------
@@ -1418,7 +1418,7 @@ class Csviwer(Qw.QMainWindow):
                                     # ----------------------------
                                 elif self.PLOT_TYPE == DENSITY: # Density plot (when x and y are the same, it stacks)
                                     if len(data3) != 0:
-                                        sns.kdeplot(self.ax1,self.data[self.x_var].replace([np.inf, -np.inf], np.nan),self.data[self.y_var].replace([np.inf, -np.inf], np.nan), shade=True, cbar = True, cmap = "cmo."+cmap )
+                                        sns.kdeplot(self.data[self.x_var].replace([np.inf, -np.inf], np.nan),self.data[self.y_var].replace([np.inf, -np.inf], np.nan), ax=self.ax1, shade=True, cbar = True, cmap = "cmo."+cmap )
                                         # Log #-----------------------
                                         File_log_str +=  'sns.kdeplot(subssubub_data["' + str(self.x_var) + '"], subsubsub_data["' + str(self.y_var) + '"], ax = ax, shade = True, cbar = True, cmap = "cmo." + "'+str(cmap)+'" ) ' + '\n'
                                         # ----------------------------
