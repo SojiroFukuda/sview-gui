@@ -1676,4 +1676,4 @@ def buildGUI(data = 'None'):
     sys.exit(app.exec_())
 
 
-buildGUI()
+# buildGUI()
