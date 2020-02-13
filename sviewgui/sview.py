@@ -9,8 +9,8 @@ import glob
 import numpy as np
 import pandas as pd
 import random
-from . import sgui as gui
-
+# from . import sgui as gui
+import sgui as gui
 import matplotlib.cm
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
@@ -185,6 +185,9 @@ class Csviwer(Qw.QMainWindow):
         self.ui.cmb_sort.setEnabled(False)
         self.ui.cmb_subsort.setEnabled(False)
         self.ui.cmb_subsubsort.setEnabled(False)
+        self.ui.cb_colorbar.setEnabled(True)
+        self.ui.cb_subcolorbar.setEnabled(False)
+        self.ui.cb_subsubcolorbar.setEnabled(False)
         self.HEADER_LIST = self.csv.columns
         self.ui.cmb_color.clear()
         self.ui.cmb_subcolor.clear()
@@ -235,6 +238,9 @@ class Csviwer(Qw.QMainWindow):
         self.ui.cmb_sort.setEnabled(False)
         self.ui.cmb_subsort.setEnabled(False)
         self.ui.cmb_subsubsort.setEnabled(False)
+        self.ui.cb_colorbar.setEnabled(True)
+        self.ui.cb_subcolorbar.setEnabled(False)
+        self.ui.cb_subsubcolorbar.setEnabled(False)
         self.HEADER_LIST = self.csv.columns
         self.ui.cmb_color.clear()
         self.ui.cmb_subcolor.clear()
@@ -359,6 +365,8 @@ class Csviwer(Qw.QMainWindow):
                 self.ui.cmb_sort.clear()
                 self.ui.cmb_sort.setEnabled(False)
                 self.isNumericMode = True
+                self.ui.cb_colorbar.setChecked(True)
+                self.ui.cb_colorbar.setEnabled(True)
             else:
                 self.isNumericMode = False
                 self.ui.cmb_sort.setEnabled(True)
@@ -366,6 +374,8 @@ class Csviwer(Qw.QMainWindow):
                 self.ui.cmb_subsort.setEnabled(True)
                 self.ui.cmb_sort.clear()
                 self.ui.cmb_sort.addItem("All_")
+                self.ui.cb_colorbar.setChecked(False)
+                self.ui.cb_colorbar.setEnabled(False)
                 sort_list = pd.unique(self.csv[self.color_var])
                 for i,sort_item in enumerate(sort_list):
                     self.ui.cmb_sort.addItem(str(sort_item))
@@ -374,11 +384,19 @@ class Csviwer(Qw.QMainWindow):
             # self.group_var = self.color_var
             self.isNumericMode = False
             self.ui.cmb_sort.clear()
+            self.ui.cmb_subsort.clear()
+            self.ui.cmb_subsubsort.clear()
             self.ui.cmb_sort.setEnabled(False)
             self.ui.cmb_subcolor.setEnabled(False)
             self.ui.cmb_subsort.setEnabled(False)
             self.ui.cmb_subsubcolor.setEnabled(False)
             self.ui.cmb_subsubsort.setEnabled(False)
+            self.ui.cb_colorbar.setChecked(False)
+            self.ui.cb_colorbar.setEnabled(False)
+            self.ui.cb_subcolorbar.setChecked(False)
+            self.ui.cb_subcolorbar.setEnabled(False)
+            self.ui.cb_subsubcolorbar.setChecked(False)
+            self.ui.cb_subsubcolorbar.setEnabled(False)
 
     def setSort(self):
         ind = self.ui.cmb_sort.currentIndex()
@@ -386,7 +404,10 @@ class Csviwer(Qw.QMainWindow):
         if ind > 0:
             self.ui.cmb_subcolor.setEnabled(True)
             self.ui.cmb_subsort.setEnabled(True)
-            self.data = self.csv.loc[self.csv[self.color_var]==tex]
+            if tex.isdecimal():
+                self.data = self.csv.loc[self.csv[self.color_var]==float(tex)]
+            else:
+                self.data = self.csv.loc[self.csv[self.color_var]==tex]
         else:
             self.ui.cmb_subcolor.setEnabled(False)
             self.ui.cmb_subsort.setEnabled(False)
@@ -412,10 +433,14 @@ class Csviwer(Qw.QMainWindow):
             if isNumeric:
                 self.ui.cmb_subsort.clear()
                 self.ui.cmb_subsort.setEnabled(False)
+                self.ui.cb_subcolorbar.setChecked(True)
+                self.ui.cb_subcolorbar.setEnabled(True)
                 self.isNumericMode = True
             else:
                 self.isNumericMode = False
                 self.ui.cmb_subsort.setEnabled(True)
+                self.ui.cb_subcolorbar.setChecked(False)
+                self.ui.cb_subcolorbar.setEnabled(False)
                 self.ui.cmb_subsort.clear()
                 self.ui.cmb_subsort.addItem("All_")
                 sort_list = pd.unique(self.csv[self.subcolor_var])
@@ -427,16 +452,26 @@ class Csviwer(Qw.QMainWindow):
             self.isNumericMode = False
             self.ui.cmb_subsort.clear()
             self.ui.cmb_subsort.setEnabled(False)
+            self.ui.cb_subcolorbar.setChecked(False)
+            self.ui.cb_subcolorbar.setEnabled(False)
 
 
     def setSubSort(self):
         ind = self.ui.cmb_subsort.currentIndex()
-        tex = str(self.ui.cmb_subsort.currentText())
+        tex = self.ui.cmb_subsort.currentText()
         if ind > 0:
             self.ui.cmb_subsubcolor.setEnabled(True)
             self.ui.cmb_subsubsort.setEnabled(True)
-            data_temp = self.csv.loc[self.csv[self.color_var]==self.ui.cmb_sort.currentText()]
-            self.data = data_temp.loc[data_temp[self.subcolor_var]==tex]
+            if self.ui.cmb_sort.currentText().isdecimal():
+                data_temp = self.csv.loc[self.csv[self.color_var] == float(self.ui.cmb_sort.currentText())]
+            else:
+                data_temp = self.csv.loc[self.csv[self.color_var] == self.ui.cmb_sort.currentText()]
+            # data_temp = self.csv.loc[self.csv[self.color_var]==self.ui.cmb_sort.currentText()]
+            if tex.isdecimal():
+                self.data = data_temp.loc[self.csv[self.subcolor_var]==float(tex)]
+            else:
+                self.data = data_temp.loc[self.csv[self.subcolor_var]==tex]
+            # self.data = data_temp.loc[data_temp[self.subcolor_var]==tex]
         else:
             self.ui.cmb_subsubcolor.setEnabled(False)
             self.ui.cmb_subsubsort.setEnabled(False)
@@ -459,10 +494,14 @@ class Csviwer(Qw.QMainWindow):
             if isNumeric:
                 self.ui.cmb_subsubsort.clear()
                 self.ui.cmb_subsubsort.setEnabled(False)
+                self.ui.cb_subsubcolorbar.setChecked(True)
+                self.ui.cb_subsubcolorbar.setEnabled(True)
                 self.isNumericMode = True
             else:
                 self.isNumericMode = False
                 self.ui.cmb_subsubsort.setEnabled(True)
+                self.ui.cb_subsubcolorbar.setChecked(False)
+                self.ui.cb_subsubcolorbar.setEnabled(False)
                 self.ui.cmb_subsubsort.clear()
                 self.ui.cmb_subsubsort.addItem("All_")
                 sort_list = pd.unique(self.csv[self.subsubcolor_var])
@@ -474,14 +513,30 @@ class Csviwer(Qw.QMainWindow):
             self.isNumericMode = False
             self.ui.cmb_subsubsort.clear()
             self.ui.cmb_subsubsort.setEnabled(False)
+            self.ui.cb_subsubcolorbar.setChecked(False)
+            self.ui.cb_subsubcolorbar.setEnabled(False)
+
 
     def setSubsubSort(self):
         ind = self.ui.cmb_subsubsort.currentIndex()
         tex = str(self.ui.cmb_subsubsort.currentText())
         if ind > 0:
-            data_temp = self.csv.loc[self.csv[self.color_var]==self.ui.cmb_sort.currentText()]
-            data_temp = data_temp.loc[data_temp[self.subcolor_var]==self.ui.cmb_subsort.currentText()]
-            self.data = data_temp.loc[data_temp[self.subsubcolor_var]==tex]
+            if self.ui.cmb_sort.currentText().isdecimal():
+                data_temp = self.csv.loc[self.csv[self.color_var] == float(self.ui.cmb_sort.currentText())]
+            else:
+                data_temp = self.csv.loc[self.csv[self.color_var] == self.ui.cmb_sort.currentText()]
+            # data_temp = self.csv.loc[self.csv[self.color_var]==self.ui.cmb_sort.currentText()]
+            if self.ui.cmb_subsort.currentText().isdecimal():
+                data_temp = data_temp.loc[self.csv[self.subcolor_var]==float(self.ui.cmb_subsort.currentText())]
+            else:
+                data_temp = data_temp.loc[self.csv[self.subcolor_var]==self.ui.cmb_subsort.currentText()]
+            if tex.isdecimal():
+                self.data = data_temp.loc[self.csv[self.subsubcolor_var]==float(tex)]
+            else:
+                self.data = data_temp.loc[self.csv[self.subsubcolor_var]==tex]
+            # data_temp = self.csv.loc[self.csv[self.color_var]==self.ui.cmb_sort.currentText()]
+            # data_temp = data_temp.loc[data_temp[self.subcolor_var]==self.ui.cmb_subsort.currentText()]
+            # self.data = data_temp.loc[data_temp[self.subsubcolor_var]==tex]
         else:
             data_temp = self.csv.loc[self.csv[self.color_var]==self.ui.cmb_sort.currentText()]
             self.data = data_temp.loc[data_temp[self.subcolor_var]==self.ui.cmb_subsort.currentText()]
@@ -491,8 +546,47 @@ class Csviwer(Qw.QMainWindow):
 
     def checkPlot(self):
         pass
+    def useColorbarI(self):
+        checked = self.ui.cb_colorbar.isChecked()
+        if checked:
+            self.isNumericMode = True
+            self.ui.cmb_sort.clear()
+            self.ui.cmb_sort.setEnabled(False)
+        else:
+            self.isNumericMode = False
+            self.ui.cmb_sort.setEnabled(True)
+            self.ui.cmb_sort.addItem("All_")
+            sort_list = pd.unique(self.csv[self.color_var])
+            for i,sort_item in enumerate(sort_list):
+                self.ui.cmb_sort.addItem(str(sort_item))
 
-    
+
+    def useColorbarII(self):
+        checked = self.ui.cb_subcolorbar.isChecked()
+        if checked:
+            self.isNumericMode = True
+            self.ui.cmb_subsort.clear()
+            self.ui.cmb_subsort.setEnabled(False)
+        else:
+            self.isNumericMode = False
+            self.ui.cmb_subsort.setEnabled(True)
+            self.ui.cmb_subsort.addItem("All_")
+            sort_list = pd.unique(self.csv[self.subcolor_var])
+            for i,sort_item in enumerate(sort_list):
+                self.ui.cmb_subsort.addItem(str(sort_item))
+    def useColorbarIII(self):
+        checked = self.ui.cb_subsubcolorbar.isChecked()
+        if checked:
+            self.isNumericMode = True
+            self.ui.cmb_subsubsort.clear()
+            self.ui.cmb_subsubsort.setEnabled(False)
+        else:
+            self.isNumericMode = False
+            self.ui.cmb_subsubsort.setEnabled(True)
+            self.ui.cmb_subsubsort.addItem("All_")
+            sort_list = pd.unique(self.csv[self.subsubcolor_var])
+            for i,sort_item in enumerate(sort_list):
+                self.ui.cmb_subsubsort.addItem(str(sort_item))
 
     def graphDraw(self):
         # try:
@@ -548,7 +642,6 @@ class Csviwer(Qw.QMainWindow):
         HISTGRAM = 2
         LINE = 3
         BOXPLOT = 4
-
         ALL_SORT = 0
 
         colors=["#005AFF", "#FF4B00","#03AF7A", "#804000", "#990099", "#FF8082", "#4DC4FF", "#F6AA00"]
@@ -672,6 +765,7 @@ class Csviwer(Qw.QMainWindow):
                     break
             if self.ui.cmb_sort.currentIndex() == ALL_SORT: # use discrete colors and plot all
                 for i, value in enumerate(pd.unique(self.data[self.color_var])):
+                    print(value)
                     color_index = i%clen
                     marker_index = i%mlen
                     cmap_index = i%cmaplen
@@ -706,7 +800,10 @@ class Csviwer(Qw.QMainWindow):
                     File_log_str +=   'sns.boxplot( x = "' + str(self.x_var) + '", y = "' + str(self.y_var) + '", hue = "' + str(self.color_var) + '", data = DATA.replace([np.inf, -np.inf], np.nan).dropna(), ax = ax )' + '\n'
                 else:
                     File_log_str +=   'for i, value in enumerate( pd.unique( DATA["' + str(self.color_var) + '"] ) ):' + '\n'
-                    File_log_str +=   '    ' + 'sub_data = DATA.loc[ DATA["' + str(self.color_var) + '"] == value ]' + '\n'
+                    if isNumeric:
+                        File_log_str +=   '    ' + 'sub_data = DATA.loc[ DATA["' + str(self.color_var) + '"] == float(value) ]' + '\n'  
+                    else:  
+                        File_log_str +=   '    ' + 'sub_data = DATA.loc[ DATA["' + str(self.color_var) + '"] == value ]' + '\n'
                     if self.PLOT_TYPE == SCATTER:
                         File_log_str +=   '    ' + 'colors = ["#005AFF", "#FF4B00","#03AF7A", "#804000", "#990099", "#FF8082", "#4DC4FF", "#F6AA00"]' + '\n'
                         File_log_str +=   '    ' + 'markers = [ "o", "v", "^", "<", ">", "8", "s", "p", "*", "h", "H", "D", "d", "P", "X" ]' + '\n'
@@ -729,7 +826,10 @@ class Csviwer(Qw.QMainWindow):
                 value = self.ui.cmb_sort.currentIndex() - 1
                 # data = self.csv.loc[ self.csv[self.color_var] == pd.unique(self.csv[self.color_var])[value] ]
                 # Log #-----------------------
-                File_log_str +=  'sub_data = DATA.loc[ DATA["' + str(self.color_var) + '"] == "'+str(pd.unique(self.csv[self.color_var])[value])+'"]' + '\n'
+                if isNumeric:
+                    File_log_str +=  'sub_data = DATA.loc[ DATA["' + str(self.color_var) + '"] == '+str(pd.unique(self.csv[self.color_var])[value])+']' + '\n'
+                else:
+                    File_log_str +=  'sub_data = DATA.loc[ DATA["' + str(self.color_var) + '"] == "'+str(pd.unique(self.csv[self.color_var])[value])+'"]' + '\n'
                 # ----------------------------
                 if self.subcolor_var == 'None_': 
                     # scatter graph
@@ -760,6 +860,11 @@ class Csviwer(Qw.QMainWindow):
                         File_log_str +=  'ax = sns.boxplot( x = "'+str(self.x_var)+'", y = "'+str(self.y_var)+'", data=sub_data.replace([np.inf, -np.inf], np.nan).dropna() )' + '\n'
                         # ----------------------------
                 else:
+                    isNumeric = True
+                    for comp in self.csv[self.subcolor_var]:
+                        if isinstance(comp,str):
+                            isNumeric = False
+                            break
                     if self.ui.cmb_subsort.currentIndex() == ALL_SORT: # use discrete colors and plot all
                         for i, value2 in enumerate(pd.unique(self.data[self.subcolor_var])):
                             color_index = i%clen
@@ -824,7 +929,10 @@ class Csviwer(Qw.QMainWindow):
                         value2 = self.ui.cmb_subsort.currentIndex() - 1
                         # data2 = data.loc[ data[ self.subcolor_var ] == pd.unique(self.csv[self.subcolor_var])[value2] ]
                         # Log #-----------------------
-                        File_log_str +=  'subsub_data = sub_data.loc[ sub_data["' + str(self.subcolor_var) + '"] == "'+str(pd.unique(self.csv[self.subcolor_var])[value2])+'"]' + '\n'
+                        if isNumeric:
+                            File_log_str +=  'subsub_data = sub_data.loc[ sub_data["' + str(self.subcolor_var) + '"] == '+str(pd.unique(self.csv[self.subcolor_var])[value2])+']' + '\n'
+                        else:
+                            File_log_str +=  'subsub_data = sub_data.loc[ sub_data["' + str(self.subcolor_var) + '"] == "'+str(pd.unique(self.csv[self.subcolor_var])[value2])+'"]' + '\n'
                         # ----------------------------
                         if self.subsubcolor_var == 'None_':
                             if self.PLOT_TYPE == SCATTER:
@@ -857,6 +965,11 @@ class Csviwer(Qw.QMainWindow):
                                 File_log_str +=  'ax = sns.boxplot( x = "'+str(self.x_var)+'", y = "'+str(self.y_var)+'", data=subsub_data.replace([np.inf, -np.inf], np.nan).dropna() )' + '\n'
                                 # ----------------------------
                         else:
+                            isNumeric = True
+                            for comp in self.csv[self.subsubcolor_var]:
+                                if isinstance(comp,str):
+                                    isNumeric = False
+                                    break
                             if self.ui.cmb_subsubsort.currentIndex() == ALL_SORT: # use discrete colors and plot all
                                 for i, value3 in enumerate(pd.unique(self.data[self.subsubcolor_var])):
                                     color_index = i%clen
@@ -923,11 +1036,11 @@ class Csviwer(Qw.QMainWindow):
                                 value3 = self.ui.cmb_subsubsort.currentIndex() - 1
                                 # data3 = data2.loc[ data2[ self.subsubcolor_var ] == pd.unique(self.csv[self.subsubcolor_var])[value3] ]
                                 # Log #-----------------------
-                                File_log_str +=  'subsubsub_data = subsub_data.loc[ subsub_data["' + str(self.subsubcolor_var) + '"] == "'+str(pd.unique(self.csv[self.subsubcolor_var])[value3])+'"]'  
+                                File_log_str +=  'subsubsub_data = subsub_data.loc[ subsub_data["' + str(self.subsubcolor_var) + '"] == "'+str(pd.unique(self.csv[self.subsubcolor_var])[value3])+'"]'  + '\n'
                                 # ----------------------------
                                 # scatter graph
                                 if self.PLOT_TYPE == SCATTER:
-                                    self.ax1.scatter(data[self.x_var].replace([np.inf, -np.inf], np.nan), self.data[self.y_var].replace([np.inf, -np.inf], np.nan), alpha = alpha, s = marker_size, label = pd.unique(self.csv[self.subsubcolor_var])[value3])
+                                    self.ax1.scatter(self.data[self.x_var].replace([np.inf, -np.inf], np.nan), self.data[self.y_var].replace([np.inf, -np.inf], np.nan), alpha = alpha, s = marker_size, label = pd.unique(self.csv[self.subsubcolor_var])[value3])
                                     # Log #-----------------------
                                     File_log_str +=  'ax.scatter(subsubsub_data["'+str(self.x_var)+'"].replace([np.inf, -np.inf], np.nan), subsubsub_data["'+str(self.y_var)+'"].replace([np.inf, -np.inf], np.nan), s = '+str(marker_size)+', alpha ='+str(alpha)+',edgecolor="' + str(edge_color)+'",linewidth= ' + str(edge_width) +')' + '\n'
                                     # ----------------------------
@@ -969,7 +1082,7 @@ class Csviwer(Qw.QMainWindow):
 
     def graphDraw_Numeric_Syntax(self):
         # Syntax Coloring Setting #--------------------------
-        
+
         # Log #-----------------------
         File_log_str = '#- Import CSV as DataFrame ---------- ' + '\n'
         File_log_str += 'FILE_PATH = \'' + str(self.CSV_PATH) + '\'' + '\n'
@@ -1561,3 +1674,6 @@ def buildGUI(data = 'None'):
     elif isinstance(data,str) and data != 'None':
         wmain.loadData(data)
     sys.exit(app.exec_())
+
+
+buildGUI()
