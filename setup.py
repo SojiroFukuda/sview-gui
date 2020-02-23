@@ -21,7 +21,6 @@ version = next((line.split('=')[1].strip().replace("'", '')
                                               '__init__.py'))
                 if line.startswith('__version__ = ')), '0.3.2')
 
-
 setup(
     name="sviewgui",
     version=version,
