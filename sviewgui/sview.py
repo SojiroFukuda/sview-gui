@@ -9,8 +9,8 @@ import glob
 import numpy as np
 import pandas as pd
 import random
-from . import sgui as gui
-# import sgui as gui
+# from . import sgui as gui
+import sgui as gui
 import matplotlib.cm
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
@@ -1765,3 +1765,5 @@ def buildGUI(data = 'None'):
         wmain.loadData(data)
     sys.exit(app.exec_())
 
+
+buildGUI()
