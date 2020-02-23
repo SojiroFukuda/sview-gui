@@ -39,7 +39,6 @@ import sviewgui.sview as sv
 import pandas as pd
 
 FILE_PATH = "User/Documents/yourdata.csv"
-
 df = pd.read_csv(FILE_PATH)
 sv.buildGUI(df)
 ```
