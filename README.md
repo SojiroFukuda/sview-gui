@@ -12,23 +12,13 @@ Here are the main features;
 # Usage
 
 This package has only one method: buildGUI(). 
-buildGUI() will take zero or one arguments like bellow.
+This method takes zero or one arguments like bellow.
 
 ```python
 ## Sample Code 1
 import sviewgui.sview as sv
 
 sv.buildGUI()
-```
-You can use pandas' DataFrame object for the argument.
-
-```python
-## Sample Code 2
-import sviewgui.sview as sv
-import pandas as pd
-
-df = pd.DataFrame(yourdata)
-sv.buildGUI(df)
 ```
 
 Also you can use the file path of your csv file.
@@ -39,6 +29,19 @@ import sviewgui.sview as sv
 
 FILE_PATH = "User/Documents/yourdata.csv"
 sv.buildGUI(FILE_PATH)
+```
+
+You can use pandas' DataFrame object for the argument.
+
+```python
+## Sample Code 2
+import sviewgui.sview as sv
+import pandas as pd
+
+FILE_PATH = "User/Documents/yourdata.csv"
+
+df = pd.read_csv(FILE_PATH)
+sv.buildGUI(df)
 ```
 
 # About license
