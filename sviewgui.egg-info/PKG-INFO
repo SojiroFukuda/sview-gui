@@ -1,0 +1,54 @@
+Metadata-Version: 1.2
+Name: sviewgui
+Version: 0.3.4
+Summary: Package Dependency: Validates package requirements
+Home-page: https://github.com/SojiroFukuda/sview-gui
+Author: SojiroFukuda
+Author-email: S.Fukuda-2018@hull.ac.uk
+Maintainer: SojiroFukuda
+Maintainer-email: S.Fukuda-2018@hull.ac.uk
+License: SojiroFukuda
+Description: # sview-gui
+        
+        PyQt5 GUI for data visualisation of csv file or pandas' DataFrame.
+        This GUI is based on the matplotlib and you can visualize your csv file in various ways.
+        Here are the main features;
+        
+        • Scatter, line, density, histgram, and box plot for visualisation your csv
+        • Detail setting for the marker size, line width, number of bins of histgram, color map (from cmocean)
+        • Save figure as editable PDF
+        • Source code of the graph you plotted are recorded in the log window
+        
+        
+        # Usage
+        
+        This package has only one method: buildGUI(). 
+        This method takes zero or one arguments like bellow.
+        You can use the file path of your csv file as an argument.
+        Also, you can use pandas' DataFrame object for the argument.
+        
+        ## Sample Code 1
+        import sviewgui.sview as sv
+        sv.buildGUI()
+        
+        ## Sample Code 2
+        import sviewgui.sview as sv
+        FILE_PATH = "User/Documents/yourdata.csv"
+        sv.buildGUI(FILE_PATH)
+        
+        ## Sample Code 3
+        import sviewgui.sview as sv
+        import pandas as pd
+        
+        FILE_PATH = "User/Documents/yourdata.csv"
+        df = pd.read_csv(FILE_PATH)
+        sv.buildGUI(df)
+        
+        
+        # About license
+        © 2019 Sojiro Fukuda All Rightss Reserved.
+        Free to modify and redistribute by your own responsibility.
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
