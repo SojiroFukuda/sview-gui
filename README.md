@@ -21,7 +21,7 @@ import sviewgui.sview as sv
 sv.buildGUI()
 ```
 
-Also you can use the file path of your csv file.
+You can use the file path of your csv file.
 
 ```python
 ## Sample Code 2 ##
@@ -31,7 +31,7 @@ FILE_PATH = "User/Documents/yourdata.csv"
 sv.buildGUI(FILE_PATH)
 ```
 
-You can use pandas' DataFrame object for the argument.
+Also, you can use pandas' DataFrame object for the argument.
 
 ```python
 ## Sample Code 3 ##
