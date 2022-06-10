@@ -1,0 +1,12 @@
+MANIFEST.in
+README.md
+setup.py
+sviewgui/__init__.py
+sviewgui/sgui.py
+sviewgui/sview.py
+sviewgui.egg-info/PKG-INFO
+sviewgui.egg-info/SOURCES.txt
+sviewgui.egg-info/dependency_links.txt
+sviewgui.egg-info/entry_points.txt
+sviewgui.egg-info/requires.txt
+sviewgui.egg-info/top_level.txt
