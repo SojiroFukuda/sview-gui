@@ -16,9 +16,9 @@ sv.buildGUI(FILE_PATH)
 ```python
 ## Sample Code 3
 import sviewgui.sview as sv
+import seaborn as sns
 import pandas as pd
 
-FILE_PATH = "User/Documents/yourdata.csv"
-df = pd.read_csv(FILE_PATH)
+df = sns.load_dataset('penguins')
 sv.buildGUI(df)
 ```
