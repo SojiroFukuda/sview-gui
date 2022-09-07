@@ -36,8 +36,8 @@ import sviewgui.sview as sv
 from sklearn.datasets import load_iris
 import pandas as pd
 
-data = load_iris() # load iris data as series
-df = pd.DataFrame(data=data.data, columns=data.feature_names)
+data = load_iris() # load iris data 
+df = pd.DataFrame(data=data.data, columns=data.feature_names) # convert sklearn data into DataFrame object
 sv.buildGUI(df)
 ```
 Now, you are good to go. Have a fun with Sview.
