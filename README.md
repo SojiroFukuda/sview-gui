@@ -2,7 +2,11 @@
 
 PyQt5 GUI for data visualisation based on matplotlib and seaborn.
 Have you ever felt that you are wasting a lot of time writing the code for a simple figure?
-If so, this GUI will help you out to save your time. You can plot and save your figure by just pushing a couple of buttons on Sviewgui. Not only that, you can also get the source code of your plot so that you can copy and paste it to your environment to adjust minor settings.
+If so, this GUI will help you out to save your time. 
+You can plot and save your figure by just pushing a couple of buttons on Sviewgui.
+All figures you made are recorded in the log window as their source code. 
+You can reproduce and further modify your figures, copying and pasting the code from the log into your own editor.
+
 Main features are
 + Scatter, line, kdeplot, histgram, and box plot
 + Detail setting for the style of plot, marker size, line width, number of bins of histgram, colormap, colorbar, etc.
@@ -13,14 +17,37 @@ Main features are
 # Usage
 
 This package has only one method: buildGUI(). 
-You can use the file path of your csv file as an argument.
-Also, you can use pandas' DataFrame object for the argument.
+```python
+import sviewgui.sview as sv
+
+sv.buildGUI()
+```
+Then, GUI window will pop up, then you can choose your csv file via GUI.
+Alternatively, you can also pass the path of your csv file,
+```python
+import sviewgui.sview as sv
+
+csvpath = 'usr/mydata.csv'
+sv.buildGUI(csvpath)
+```
+or pandas DataFrame object
+```python
+import sviewgui.sview as sv
+from sklearn.datasets import load_iris
+import pandas as pd
+
+data = load_iris() # load iris data as series
+df = pd.DataFrame(data=data.data, columns=data.feature_names)
+sv.buildGUI(df)
+```
+Now, you are good to go. Have a fun with Sview.
+
 
 # Recent updata
 
 + Fixed minor bugs.
 + log scale for negative columns, colorbar, histgram
-+ Adjustable style
++ Adjustable style (seaborn, ggplot, etc.)
 + kdeplot with scatter plot.
 
 # About license
