@@ -10,7 +10,7 @@ You can reproduce and further modify your figures, copying and pasting the code 
 Main features are
 + Scatter, line, kdeplot, histgram, and box plot
 + Detail setting for the style of plot, marker size, line width, number of bins of histgram, colormap, colorbar, etc.
-+ Subdevide your data based on the columns of DataFrame and use different colors for each subset in your plot.
++ Subdevide your data based on the columns of DataFrame and use different colours for each subset in your plot.
 + Save figure as editable PDF
 + Source code of the graph you plotted are recorded in the log window
 
@@ -40,16 +40,16 @@ data = load_iris() # load iris data
 df = pd.DataFrame(data=data.data, columns=data.feature_names) # convert sklearn data into DataFrame object
 sv.buildGUI(df)
 ```
-Now, you are good to go. Have a fun with Sview.
+Now, you are good to go. Have fun with Sview.
 
 
-# Recent updata
+# Recent update
 
 + Fixed minor bugs.
 + log scale for negative columns, colorbar, histgram
 + Adjustable style (seaborn, ggplot, etc.)
 + kdeplot with scatter plot.
 
-# About license
-© 2019 Sojiro Fukuda All Rightss Reserved.
-Free to modify and redistribute by your own responsibility.
+# About licence
+© 2019 Sojiro Fukuda All Rights Reserved.
+Free to modify and redistribute by your responsibility.

@@ -22,7 +22,7 @@ from matplotlib.font_manager import FontProperties
 
 from matplotlib.lines import Line2D # default markars 
 from pathlib import Path
-from PyQt5.Qt import PYQT_VERSION_STR
+# from PyQt5.Qt import PYQT_VERSION_STR
 from datetime import datetime
 
 import scipy.stats as st
