@@ -31,6 +31,7 @@ setup(
     maintainer_email='S.Fukuda-2018@hull.ac.uk',
     description='Package Dependency: Validates package requirements',
     long_description=readme,
+    long_description_content_type='markdown',
     packages=find_packages(),
     install_requires=[
         "PyQt5 >= 5.7.0",
