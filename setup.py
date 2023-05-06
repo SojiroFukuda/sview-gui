@@ -19,7 +19,7 @@ version = next((line.split('=')[1].strip().replace("'", '')
                 for line in open(os.path.join(here,
                                               'sviewgui',
                                               '__init__.py'))
-                if line.startswith('__version__ = ')),'1.1.1')
+                if line.startswith('__version__ = ')),'1.1.2')
 
 setup(
     name="sviewgui",
@@ -33,7 +33,6 @@ setup(
     long_description=readme,
     packages=find_packages(),
     install_requires=[
-#         "sys >= 3.7.3",
         "PyQt5 >= 5.7.0",
         "numpy >= 1.16.0",
         "pandas >= 0.24.0",
