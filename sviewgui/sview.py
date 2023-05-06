@@ -9,8 +9,8 @@ import glob
 import numpy as np
 import pandas as pd
 import random
-from . import sgui as gui
-# import sgui as gui
+from . import sgui as gui # switch
+# import sgui as gui   # 
 import matplotlib.cm
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
@@ -970,7 +970,7 @@ class Csviwer(Qw.QMainWindow):
     
     
     def get_pallete(self):
-        return (plt.rcParams['axes.prop_cycle'].by_key()['color'], list(Line2D.filled_markers), list(matplotlib.cm.cmap_d.keys()) )
+        return (plt.rcParams['axes.prop_cycle'].by_key()['color'], list(Line2D.filled_markers), list(cmocean.cm.cmap_d.keys()) )
     
     
     
@@ -1477,4 +1477,3 @@ def buildGUI(data = 'None'):
     elif isinstance(data,str) and data != 'None':
         wmain.loadData(data)
     sys.exit(app.exec_())
-
